@@ -1,0 +1,17 @@
+// vitest.config.js
+import { defineConfig } from "file:///sessions/sharp-zen-heisenberg/mnt/black-brass-rebellion/node_modules/vitest/dist/config.js";
+var vitest_config_default = defineConfig({
+  test: {
+    environment: "jsdom",
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "lcov"],
+      thresholds: { lines: 80, functions: 80, branches: 70 }
+    },
+    include: ["tests/unit/**/*.test.js"]
+  }
+});
+export {
+  vitest_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZXN0LmNvbmZpZy5qcyJdLAogICJzb3VyY2VzQ29udGVudCI6IFsiY29uc3QgX192aXRlX2luamVjdGVkX29yaWdpbmFsX2Rpcm5hbWUgPSBcIi9zZXNzaW9ucy9zaGFycC16ZW4taGVpc2VuYmVyZy9tbnQvYmxhY2stYnJhc3MtcmViZWxsaW9uXCI7Y29uc3QgX192aXRlX2luamVjdGVkX29yaWdpbmFsX2ZpbGVuYW1lID0gXCIvc2Vzc2lvbnMvc2hhcnAtemVuLWhlaXNlbmJlcmcvbW50L2JsYWNrLWJyYXNzLXJlYmVsbGlvbi92aXRlc3QuY29uZmlnLmpzXCI7Y29uc3QgX192aXRlX2luamVjdGVkX29yaWdpbmFsX2ltcG9ydF9tZXRhX3VybCA9IFwiZmlsZTovLy9zZXNzaW9ucy9zaGFycC16ZW4taGVpc2VuYmVyZy9tbnQvYmxhY2stYnJhc3MtcmViZWxsaW9uL3ZpdGVzdC5jb25maWcuanNcIjtpbXBvcnQgeyBkZWZpbmVDb25maWcgfSBmcm9tICd2aXRlc3QvY29uZmlnJ1xuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHtcbiAgdGVzdDoge1xuICAgIGVudmlyb25tZW50OiAnanNkb20nLFxuICAgIGNvdmVyYWdlOiB7XG4gICAgICBwcm92aWRlcjogJ3Y4JyxcbiAgICAgIHJlcG9ydGVyOiBbJ3RleHQnLCAnbGNvdiddLFxuICAgICAgdGhyZXNob2xkczogeyBsaW5lczogODAsIGZ1bmN0aW9uczogODAsIGJyYW5jaGVzOiA3MCB9XG4gICAgfSxcbiAgICBpbmNsdWRlOiBbJ3Rlc3RzL3VuaXQvKiovKi50ZXN0LmpzJ11cbiAgfVxufSlcbiJdLAogICJtYXBwaW5ncyI6ICI7QUFBOFYsU0FBUyxvQkFBb0I7QUFDM1gsSUFBTyx3QkFBUSxhQUFhO0FBQUEsRUFDMUIsTUFBTTtBQUFBLElBQ0osYUFBYTtBQUFBLElBQ2IsVUFBVTtBQUFBLE1BQ1IsVUFBVTtBQUFBLE1BQ1YsVUFBVSxDQUFDLFFBQVEsTUFBTTtBQUFBLE1BQ3pCLFlBQVksRUFBRSxPQUFPLElBQUksV0FBVyxJQUFJLFVBQVUsR0FBRztBQUFBLElBQ3ZEO0FBQUEsSUFDQSxTQUFTLENBQUMseUJBQXlCO0FBQUEsRUFDckM7QUFDRixDQUFDOyIsCiAgIm5hbWVzIjogW10KfQo=
