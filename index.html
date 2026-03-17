@@ -1,24 +1,73 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BLACK: Brass Rebellion</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
-    #gameCanvas { display: block; background: #000; border: 1px solid #1a1a0a; }
-    #mobileControls { display: flex; gap: 16px; margin-top: 12px; }
-    .ctrl-btn { background: #0a0a00; color: #c8a84b; border: 1px solid #c8a84b; padding: 12px 24px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; border-radius: 4px; user-select: none; touch-action: manipulation; }
-  </style>
-</head>
-<body>
-  <canvas id="gameCanvas" width="560" height="460"></canvas>
-  <div id="mobileControls">
-    <button class="ctrl-btn" id="btnLeft">&#9664;</button>
-    <button class="ctrl-btn" id="btnFire">FIRE</button>
-    <button class="ctrl-btn" id="btnRight">&#9654;</button>
-  </div>
-  <script type="module" src="/src/main.js"></script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLACK: Brass Rebellion</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: 'Courier New', monospace;
+        color: #00ff00;
+      }
+
+      canvas {
+        border: 2px solid #00ff00;
+        background-color: #000000;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+      }
+
+      #gameContainer {
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+      }
+
+      .info {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #00ff00;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 640px) {
+        canvas {
+          max-width: 100%;
+          height: auto;
+        }
+
+        body {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gameContainer">
+      <h1>BLACK: Brass Rebellion</h1>
+      <canvas id="gameCanvas" width="560" height="460"></canvas>
+      <div class="info">
+        <p>Arrow Keys / Touch: Move | Space / Tap: Fire | P: Pause</p>
+        <p>v1.0.0 - A retro arcade shoot-em-up</p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>

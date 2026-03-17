@@ -1,0 +1,218 @@
+[
+  {
+    "id": "US-01",
+    "title": "GameLoop con requestAnimationFrame y delta time",
+    "sprint": 1,
+    "size": "M",
+    "labels": ["engine", "core", "animation"],
+    "body": "Implementar el GameLoop que maneje la ejecución del juego con requestAnimationFrame y cálculo de delta time.\n\nCriterios de aceptación:\n- Crear clase GameLoop en src/engine/GameLoop.js\n- Recibir updateFn y renderFn en constructor\n- Implementar métodos: start(), stop(), pause(), resume()\n- Delta time máximo capeado a 0.05 segundos\n- Calcular FPS con rolling average de 60 frames\n- Pasar tests unitarios con cobertura >= 80%\n- ESLint y Prettier sin errores",
+    "depends_on": []
+  },
+  {
+    "id": "US-02",
+    "title": "InputManager con teclado y touch",
+    "sprint": 1,
+    "size": "M",
+    "labels": ["engine", "input", "controls"],
+    "body": "Implementar InputManager para manejar entrada de teclado y touch.\n\nCriterios de aceptación:\n- Crear clase InputManager en src/engine/InputManager.js\n- Escuchar keydown/keyup y eventos touch\n- Implementar getters: left, right, fire, pause, start\n- Pause y start retornan true solo en el frame que se presionan\n- Limpiar listeners en destroy()\n- Tests unitarios para todas las entradas\n- Compatibilidad con mouse/teclado y touch",
+    "depends_on": []
+  },
+  {
+    "id": "US-03",
+    "title": "StateMachine con transiciones de estados",
+    "sprint": 1,
+    "size": "S",
+    "labels": ["engine", "state-management"],
+    "body": "Implementar máquina de estados para controlar los diferentes estados del juego.\n\nCriterios de aceptación:\n- Crear clase StateMachine en src/engine/StateMachine.js\n- Estados: START, PLAYING, PAUSED, LEVEL_COMPLETE, GAME_OVER, WIN\n- Implementar transiciones válidas según diseño\n- Lanzar Error en transiciones inválidas\n- Tests unitarios completos\n- Cobertura >= 80%",
+    "depends_on": []
+  },
+  {
+    "id": "US-04",
+    "title": "Renderer con canvas 2D",
+    "sprint": 1,
+    "size": "S",
+    "labels": ["engine", "rendering", "graphics"],
+    "body": "Implementar Renderer para manejo del canvas HTML5.\n\nCriterios de aceptación:\n- Crear clase Renderer en src/engine/Renderer.js\n- Obtener referencia al canvas y 2D context\n- Implementar clearRect para limpiar el canvas\n- Gestionar capas de dibujo\n- Tests unitarios\n- Validar dimensiones de canvas (560x460)",
+    "depends_on": []
+  },
+  {
+    "id": "US-05",
+    "title": "Player: movimiento, disparo y vidas",
+    "sprint": 2,
+    "size": "L",
+    "labels": ["entities", "player", "gameplay"],
+    "body": "Implementar la nave del jugador (Black) con movimiento, disparo y sistema de vidas.\n\nCriterios de aceptación:\n- Crear clase Player en src/entities/Player.js\n- Movimiento horizontal dentro de [0, CANVAS_W - width]\n- Sistema de disparo con cooldown de 0.4s\n- Sistema de vidas (3 iniciales)\n- Invincibilidad temporal de 2s tras daño\n- Parpadeo visual cuando invincible\n- Tests unitarios y cobertura >= 80%\n- draw() utiliza spriteRenderer.drawPlayer()",
+    "depends_on": ["US-04"]
+  },
+  {
+    "id": "US-06",
+    "title": "Invader: 3 tipos, animación y disparo",
+    "sprint": 2,
+    "size": "L",
+    "labels": ["entities", "enemies", "animation"],
+    "body": "Implementar enemigos con 3 tipos distintos, animación y disparo aleatorio.\n\nCriterios de aceptación:\n- Crear clase Invader en src/entities/Invader.js\n- Tipos: TOP (30pts), MID (20pts), BOT (10pts)\n- Animación con 2 frames sincronizados\n- Actualizar posición según movimiento de formación\n- Sistema de puntos según tipo\n- Tests unitarios\n- Hitbox correcto: 24x16px",
+    "depends_on": ["US-04"]
+  },
+  {
+    "id": "US-07",
+    "title": "Bullet: proyectiles de player y enemy",
+    "sprint": 2,
+    "size": "M",
+    "labels": ["entities", "bullets", "gameplay"],
+    "body": "Implementar sistema de proyectiles para player y enemigos.\n\nCriterios de aceptación:\n- Crear clase Bullet en src/entities/Bullet.js\n- Velocidad: 500 px/s (player), 200 px/s (enemy)\n- Movimiento vertical según owner\n- Deactivate cuando sale del canvas\n- Dimensiones: 3x10px\n- Colores diferenciados (verde player, rojo/ámbar enemy)\n- Tests unitarios",
+    "depends_on": ["US-04"]
+  },
+  {
+    "id": "US-08",
+    "title": "CollisionSystem AABB completo",
+    "sprint": 2,
+    "size": "L",
+    "labels": ["systems", "physics", "collision"],
+    "body": "Implementar sistema de colisiones AABB para todas las entidades.\n\nCriterios de aceptación:\n- Crear clase CollisionSystem en src/systems/CollisionSystem.js\n- Métodos estáticos para: player bullets vs invaders, vs UFO, vs shields\n- Enemy bullets vs player, vs shields\n- Invaders vs shields, vs línea del player\n- Retornar array de eventos de colisión\n- Tests unitarios completos\n- Cobertura >= 80%",
+    "depends_on": ["US-05", "US-06", "US-07"]
+  },
+  {
+    "id": "US-09",
+    "title": "Shield: bloques destructibles y erosión",
+    "sprint": 3,
+    "size": "L",
+    "labels": ["entities", "shield", "gameplay"],
+    "body": "Implementar sistema de escudos con bloques destructibles.\n\nCriterios de aceptación:\n- Crear clase Shield en src/entities/Shield.js\n- Grid de bloques 4x4px según forma definida\n- Detección de colisión de proyectiles\n- Erosión de bloques adyacentes al impacto\n- Regeneración parametrizable por nivel\n- Bounding box del shield\n- Tests unitarios\n- Visualización correcta de bloques dañados",
+    "depends_on": ["US-08"]
+  },
+  {
+    "id": "US-10",
+    "title": "UFO: nave especial con power-ups",
+    "sprint": 3,
+    "size": "M",
+    "labels": ["entities", "ufо", "gameplay"],
+    "body": "Implementar nave UFO especial con aparición aleatoria y power-ups.\n\nCriterios de aceptación:\n- Crear clase UFO en src/entities/UFO.js\n- Aparición aleatoria entre 25-35 segundos\n- Movimiento horizontal a 120 px/s\n- Puntuación aleatoria según probabilidades\n- Generación de power-ups al destruir\n- Dimensiones: 48x20px\n- Tests unitarios\n- Visualización del UFO",
+    "depends_on": ["US-04"]
+  },
+  {
+    "id": "US-11",
+    "title": "ScoreSystem: puntos, multiplicadores y persistencia",
+    "sprint": 3,
+    "size": "M",
+    "labels": ["systems", "scoring", "persistence"],
+    "body": "Implementar sistema de puntuación con multiplicadores y persistencia.\n\nCriterios de aceptación:\n- Crear clase ScoreSystem en src/systems/ScoreSystem.js\n- Sumar puntos según tipo de invader\n- Multiplicadores de racha\n- Hi-score persistido en localStorage\n- Métodos: addPoints, addInvaderKill, addUFOKill, saveHiScore, loadHiScore\n- Tests unitarios\n- Validar persistencia en localStorage",
+    "depends_on": []
+  },
+  {
+    "id": "US-12",
+    "title": "LevelSystem: dificultad progresiva",
+    "sprint": 3,
+    "size": "M",
+    "labels": ["systems", "levels", "progression"],
+    "body": "Implementar sistema de niveles con dificultad progresiva.\n\nCriterios de aceptación:\n- Crear clase LevelSystem en src/systems/LevelSystem.js\n- 6 niveles predefinidos\n- Configuración: velocidad invaders, cadencia disparo, regeneración shields\n- Método getConfig() retorna parámetros del nivel\n- nextLevel() incrementa nivel\n- Tests unitarios\n- Validar progresión de dificultad",
+    "depends_on": []
+  },
+  {
+    "id": "US-13",
+    "title": "SpawnSystem: formación y timers",
+    "sprint": 3,
+    "size": "L",
+    "labels": ["systems", "spawning", "formation"],
+    "body": "Implementar sistema de spawn para formación de invaders y UFO.\n\nCriterios de aceptación:\n- Crear clase SpawnSystem en src/systems/SpawnSystem.js\n- Grid de invaders: 5x4 formación\n- Timers para UFO (25-35s)\n- Regeneración de invaders al limpiar pantalla\n- Movimiento de formación con bounce en bordes\n- Tests unitarios\n- Validar espaciado de grid y posiciones iniciales",
+    "depends_on": ["US-06", "US-10"]
+  },
+  {
+    "id": "US-14",
+    "title": "HUD: score, nivel y vidas",
+    "sprint": 4,
+    "size": "M",
+    "labels": ["ui", "hud", "graphics"],
+    "body": "Implementar HUD en pantalla con información del juego.\n\nCriterios de aceptación:\n- Crear clase HUD en src/ui/HUD.js\n- Mostrar score actual y hi-score\n- Mostrar nivel actual\n- Mostrar vidas como íconos de nave\n- Actualizar en tiempo real\n- Tests unitarios\n- Validar posicionamiento y formato",
+    "depends_on": ["US-11", "US-12"]
+  },
+  {
+    "id": "US-15",
+    "title": "StartScreen: pantalla de inicio con lore",
+    "sprint": 4,
+    "size": "M",
+    "labels": ["ui", "screens", "narrative"],
+    "body": "Implementar pantalla de inicio con narrativa de BLACK.\n\nCriterios de aceptación:\n- Crear clase StartScreen en src/ui/StartScreen.js\n- Mostrar título y lore del universo\n- Botón o instrucción para comenzar\n- Cambio de estado a PLAYING\n- Transición suave\n- Tests unitarios\n- Validar legibilidad del texto",
+    "depends_on": ["US-03"]
+  },
+  {
+    "id": "US-16",
+    "title": "Game Over, Level Complete y Win screens",
+    "sprint": 4,
+    "size": "L",
+    "labels": ["ui", "screens", "gameplay"],
+    "body": "Implementar pantallas de fin de juego, nivel completado y victoria.\n\nCriterios de aceptación:\n- Crear clases: GameOverScreen, LevelScreen, WinScreen\n- GameOverScreen: mostrar score final, opción de reiniciar\n- LevelScreen: transición entre niveles con narrative\n- WinScreen: pantalla de victoria final\n- Transiciones de estado correctas\n- Tests unitarios\n- Animaciones de transición",
+    "depends_on": ["US-03"]
+  },
+  {
+    "id": "US-17",
+    "title": "Controles táctiles: botones móvil",
+    "sprint": 4,
+    "size": "M",
+    "labels": ["ui", "mobile", "controls"],
+    "body": "Implementar controles táctiles para versión móvil.\n\nCriterios de aceptación:\n- Crear botones virtuales: izquierda, derecha, fuego\n- Integrar con InputManager\n- Respuesta táctil visual\n- Tests E2E con Playwright\n- Compatibilidad con diferentes tamaños de pantalla\n- No interferir con controles de teclado",
+    "depends_on": ["US-02"]
+  },
+  {
+    "id": "US-18",
+    "title": "spriteRenderer: renderización de sprites",
+    "sprint": 4,
+    "size": "L",
+    "labels": ["graphics", "rendering", "sprites"],
+    "body": "Implementar funciones de renderización de sprites.\n\nCriterios de aceptación:\n- Crear módulo spriteRenderer en src/utils/spriteRenderer.js\n- Funciones: drawPlayer, drawInvader, drawUFO, drawShield, drawBullet\n- Colores según paleta de elementos.md\n- Animación de invaders (2 frames)\n- Parpadeo de invincibilidad del player\n- Tests unitarios\n- Validar calidad visual",
+    "depends_on": ["US-04"]
+  },
+  {
+    "id": "US-19",
+    "title": "Integración completa: main.js y coordinación",
+    "sprint": 5,
+    "size": "XL",
+    "labels": ["integration", "core", "main"],
+    "body": "Integrar todos los módulos en main.js para formar el juego completo.\n\nCriterios de aceptación:\n- Crear src/main.js orquestando GameLoop, InputManager, StateMachine\n- Instanciar todas las entidades y sistemas\n- Conectar eventos de colisión\n- Manejar transiciones de estado\n- Pasar tests E2E completos\n- CI en verde\n- Performance > 60fps",
+    "depends_on": ["US-01", "US-02", "US-03", "US-04", "US-05", "US-06", "US-07", "US-08", "US-09", "US-10", "US-11", "US-12", "US-13", "US-14", "US-15", "US-16", "US-17", "US-18"]
+  },
+  {
+    "id": "US-20",
+    "title": "Performance audit: 60fps en hardware moderado",
+    "sprint": 5,
+    "size": "M",
+    "labels": ["performance", "optimization", "qa"],
+    "body": "Auditoría de performance para garantizar 60fps consistentes.\n\nCriterios de aceptación:\n- Medir FPS en hardware moderado (laptop estándar)\n- Optimizar bucles de colisión\n- Validar renderización eficiente\n- Eliminar memory leaks\n- Profiling con Chrome DevTools\n- Documentar resultados\n- Tests de rendimiento",
+    "depends_on": ["US-19"]
+  },
+  {
+    "id": "US-21",
+    "title": "Compatibilidad navegadores: Chrome, Firefox, Safari",
+    "sprint": 5,
+    "size": "M",
+    "labels": ["qa", "compatibility", "testing"],
+    "body": "Validar compatibilidad en navegadores principales.\n\nCriterios de aceptación:\n- Tests en Chrome, Firefox, Safari\n- Canvas API funcional en todos\n- Touch events funcionales\n- LocalStorage disponible\n- No hay console errors\n- Documentar incompatibilidades encontradas\n- Tests E2E en CI para múltiples navegadores",
+    "depends_on": ["US-19"]
+  },
+  {
+    "id": "US-22",
+    "title": "CHANGELOG.md: documentación de versión",
+    "sprint": 5,
+    "size": "S",
+    "labels": ["documentation", "release"],
+    "body": "Crear CHANGELOG.md con historial de cambios.\n\nCriterios de aceptación:\n- Formato estándar: Keep a Changelog\n- Secciones: Added, Changed, Fixed, Removed\n- Listar todas las features implementadas\n- Incluir breaking changes si existen\n- Enlaces a issues y PRs\n- Versión v1.0.0 listada",
+    "depends_on": []
+  },
+  {
+    "id": "US-23",
+    "title": "README.md: instrucciones y créditos",
+    "sprint": 5,
+    "size": "S",
+    "labels": ["documentation", "release"],
+    "body": "Crear README.md con instrucciones de uso y créditos.\n\nCriterios de aceptación:\n- Descripción del proyecto\n- Instrucciones de instalación\n- Cómo jugar (controles)\n- Controles de teclado y móvil\n- Capturas de pantalla del gameplay\n- Créditos a inspiraciones (Space Invaders)\n- Licencia (MIT)\n- Enlaces al repositorio",
+    "depends_on": []
+  },
+  {
+    "id": "US-24",
+    "title": "Release v1.0.0 y deploy a GitHub Pages",
+    "sprint": 5,
+    "size": "M",
+    "labels": ["release", "deployment", "ci-cd"],
+    "body": "Crear tag de versión v1.0.0 y desplegar a GitHub Pages.\n\nCriterios de aceptación:\n- Crear tag v1.0.0 en git\n- GitHub Release automático con CHANGELOG\n- Deploy automático a GitHub Pages\n- Juego accesible en dominio Pages\n- Adjuntar dist/ como artefacto en release\n- Validar que el juego funciona en Pages\n- Tests E2E de gameplay en producción",
+    "depends_on": ["US-19", "US-20", "US-21", "US-22", "US-23"]
+  }
+]
